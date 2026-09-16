@@ -2,8 +2,5 @@ FROM odoo:17.0
 
 USER root
 
-# Expose Odoo's web port
-EXPOSE 8069
-
-# Set the default command to run Odoo
-CMD ["odoo"]
+# Force Odoo to look at environment variables dynamically at runtime
+ENTRYPOINT ["odoo", "--db_host=$(HOST)", "--db_user=$(USER)", "--db_password=$(PASSWORD)", "--db_port=$(PORT)", "--no-database-list"]
